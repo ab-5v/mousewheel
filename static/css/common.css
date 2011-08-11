@@ -1,0 +1,32 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.body {
+    height: 1000px;
+    padding: 100px 40px 0;
+    background-color: #414141;
+}
+
+.wrapper {
+    float: right;
+    background-color: #EF9;
+}
+.i {
+    width: 300px;
+    height: 270px;
+    overflow-y: scroll;
+    border: 1px solid #E99;
+}
+
+.item {
+    padding: 5px 10px;
+    height: 19px;
+    border-bottom: 1px solid #99E;
+}
+
+.log {
+    background-color: #999;
+    border: 1px solid #222;
+}
