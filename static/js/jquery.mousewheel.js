@@ -44,24 +44,29 @@ var method = (function(){
 
 var setup = {
     mpx: function(data, ns, handle){
-        this.addEventListener('DOMMouseScroll', function(e){
+        this.addEventListener('MozMousePixelScroll', function(e){
+            var delta = e.detail;
             var a = e.axis;
             var full = this[dim.full[a]];
             var client = this[dim.client[a]];
             var scroll = this[dim.scroll[a]] + e.detail;
+            var e = fix(e);
+            var preventDefault = false;
 
             if (scroll > 0 && scroll < full - client) {
+                preventDefault = true;
+            }
+
+            handle.call(this, e);
+
+            if (!e.isDefaultPrevented()) {
+                this[dim.scroll[a]] = this[dim.scroll[a]] + delta;
+            }
+
+            if (preventDefault) {
                 e.preventDefault();
             }
-        }, false);
 
-        this.addEventListener('MozMousePixelScroll', function(e){
-            var delta = e.detail;
-            var a = e.axis;
-
-            this[dim.scroll[a]] = this[dim.scroll[a]] + delta;
-
-            handle.call(this, fix(e));
         }, false);
     },
     dms: function(data, ns, handle){
